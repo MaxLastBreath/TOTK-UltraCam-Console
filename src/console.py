@@ -37,6 +37,19 @@ else:
 
 amount = 5
 
+
+## ~~~ COMMAND DICT ~~~
+## ENTRY : COMMAND NAME
+## LIST 1 : PACKET
+## LIST 2 : DESCRIPTION
+## LIST 3 : COMMAND
+## LIST 4 : TYPE
+## EXAMPLE : 
+## "spawn" : [packet(1), "Spawns stuff.", COMMAND(RequestActor.from_sentence), "TYPE"]
+## TYPES : graphics, utility cheats
+## NOT ALL COMMANDS WORK ON 2.5 ATM.
+## ~~~~~~~~~~~~~~~~~~~~
+
 command_dict = {
     "spawn": [1, "Spawns anything.", RequestActor.from_sentence, "utility"],
     "tp": [10, "Teleports player.", RequestVector3F.from_sentence , "utility"],
