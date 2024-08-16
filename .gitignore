@@ -1,0 +1,6 @@
+
+src/dist/UltraCam_Console.log
+src/__pycache__/keyframes.cpython-311.pyc
+src/module/__pycache__/master_modules.cpython-311.pyc
+*.pyc
+src/UltraCam_Console.log
