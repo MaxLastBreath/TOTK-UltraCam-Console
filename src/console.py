@@ -39,15 +39,18 @@ amount = 5
 
 
 ## ~~~ COMMAND DICT ~~~
+##
 ## ENTRY : COMMAND NAME
 ## LIST 1 : PACKET
 ## LIST 2 : DESCRIPTION
-## LIST 3 : COMMAND
+## LIST 3 : FUNCTION
 ## LIST 4 : TYPE
-## EXAMPLE : 
+##
+## EXAMPLE ON HOW TO USE : 
 ## "spawn" : [packet(1), "Spawns stuff.", COMMAND(RequestActor.from_sentence), "TYPE"]
 ## TYPES : graphics, utility cheats
 ## NOT ALL COMMANDS WORK ON 2.5 ATM.
+## CHECK MODULE FOLDER TO SEE HOW THE STRUCTS WORK!
 ## ~~~~~~~~~~~~~~~~~~~~
 
 command_dict = {
@@ -61,9 +64,9 @@ command_dict = {
     "pause": [23, "Pauses the game but let's the freecam still move", RequestBool.from_sentence, "utility"],
     "godmode": [32, "Makes the player Invincible.", RequestBool.from_sentence, "cheats"],
     "kill": [31, "Kills the player.", RequestBool.from_sentence, "cheats"],
-    "killall": [110, "Kills All Enemies.", RequestBool.from_sentence, "cheats"],
+    "killall": [110, "Kills All Enemies.", RequestBool.from_sentence, "cheats"], # Doesn't work on 2.5
     "heal": [30, "Heals the player.", RequestInt.from_sentence, "cheats"],
-    "healall": [111, "Kills All Enemies.", RequestBool.from_sentence, "cheats"],
+    "healall": [111, "Heals All Enemies.", RequestBool.from_sentence, "cheats"], # Doesn't work on 2.5
     "healthregen": [33, "Heals the player out of combat every 1 second.", RequestResponse.from_sentence, "gameplay"],
     "fps": [40, "Let's you adjust FPS cap", RequestFloat.from_sentence, "graphics"],
     "fov": [41, "Let's you adjust the FOV", RequestFloat.from_sentence, "graphics"],
@@ -77,7 +80,7 @@ command_dict = {
     "savesequence": [60, "Save current sequence, command $NAME.", RequestResponse.from_sentence, "utility"],
     "loadsequence": [61, "Load sequence, command $NAME", 0, "utility"], # a bit more complex.
     "deletesequence": [62, "Removes current sequence in game.", RequestResponse.from_sentence, "utility"],
-    "benchmark": [63, "Play Benchmark.", RequestResponse.from_sentence, "graphics"], # temporarily use request string, until we can request different benchmarks.
+    "benchmark": [63, "Play Benchmark.", RequestResponse.from_sentence, "graphics"], # temporarily use request string, until we can request different benchmarks (TODO:).
 }
 
 clients = []
