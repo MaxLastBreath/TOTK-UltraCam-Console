@@ -1,7 +1,7 @@
 # TOTK-UltraCam-Console
 This repo is an API for UltraCam 2.5 and 3.0+. Hugely work in progress currently.
 
-# representing Structures in C++ (4-8 B represents byte(s))
+## Representing Structures in C++ (B represents byte(s))
 | Struct         | Packet        | Value         | Value          | Value          |
 | -------------  | ------------- | ------------- | -------------  | -------------  |
 | RequestBool    | Int           | Int (4B)      | NULL           | NULL           |
