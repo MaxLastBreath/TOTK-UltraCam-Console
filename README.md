@@ -9,6 +9,9 @@ This repo is an API for UltraCam 2.5 and 3.0+. Hugely work in progress currently
   - Open CMD on Windows and type ipconfig
   - find and copy your **IPv4 IP (192.168.x.x)** - (This is your Router's IP) 
   - Paste the Copied IP Into : **UltraCam/romfs/maxlastbreath.ini** or **!!!TOTKOptimizer/romfs/maxlastbreath.ini** -> **[Console] IP = 127.0.0.1**
+5. Run the console, it should open a Command Prompt.
+6. Open the game, it should now say **"UltraCam Version X.X Connected!"**
+7. You can also **press T** in game to **reconnect** the console if needed or **connect** it in the first place!
 
 ## Representing Structures in C++ (B represents byte(s))
 | Struct         | Packet        | Value         | Value          | Value          |
