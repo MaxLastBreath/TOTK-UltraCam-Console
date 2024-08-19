@@ -15,8 +15,11 @@ if __name__ == "__main__":
             f"--name=TOTK Console",
         ]
 
+        subprocess.run(command, shell=True)
+
+
     elif platform.system() == "Linux":
-        
+
         command = [
             "pyinstaller",
             "console.py",
@@ -24,4 +27,4 @@ if __name__ == "__main__":
             f"--name=TOTK Console.AppImage",
         ]
 
-    subprocess.run(command, shell=True)
+        subprocess.run(command, check=True)
