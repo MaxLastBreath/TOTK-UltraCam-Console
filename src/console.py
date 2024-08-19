@@ -51,6 +51,7 @@ amount = 5
 ## TYPES : graphics, utility cheats
 ## NOT ALL COMMANDS WORK ON 2.5 ATM.
 ## CHECK MODULE FOLDER TO SEE HOW THE STRUCTS WORK!
+##
 ## ~~~~~~~~~~~~~~~~~~~~
 
 command_dict = {
