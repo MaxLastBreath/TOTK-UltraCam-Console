@@ -14,7 +14,9 @@ if __name__ == "__main__":
             "--onefile",
             f"--name=TOTK Console",
         ]
+
     elif platform.system() == "Linux":
+        
         command = [
             "pyinstaller",
             "console.py",
