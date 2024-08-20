@@ -3,8 +3,8 @@ This repo is an API for UltraCam 2.5 and 3.0+. Hugely work in progress currently
 
 ## How to Setup
 1. Download TOTK UltraCam Beyond (V 2.5+) or UltraCam Calamity (V 3.0+) or Latest [TOTK Optimizer Version](https://github.com/MaxLastBreath/TOTK-mods).
-2. On Legacy based Emulators Navigate to **Settings System -> Network -> Network Interface -> Loopback or Ethernet/Wifi.**
-3. On Ryujinx Navigate to **Settings -> Network -> Network Interface -> Loopback or Ethernet/Wifi.**
+2. (MANDATORY) On Legacy based Emulators Navigate to **Settings System -> Network -> Network Interface -> Loopback or Ethernet/Wifi.**
+3. (MANDATORY) On Ryujinx Navigate to **Settings -> Network -> Network Interface -> Loopback or Ethernet/Wifi.**
 4. On Switch
   - Open CMD on Windows and type ipconfig
   - find and copy your **IPv4 IP (192.168.x.x)** - (This is your Router's IP) 
