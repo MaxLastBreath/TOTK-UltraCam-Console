@@ -55,7 +55,7 @@ amount = 5
 ## ~~~~~~~~~~~~~~~~~~~~
 
 command_dict = {
-    "spawn": [1, "Spawns anything.", RequestActor.from_sentence, "utility"],
+    "spawn": [1, 'Spawns anything : Type "spawn random" for a random Enemy.', RequestActor.from_sentence, "utility"],
     "tp": [10, "Teleports player.", RequestVector3F.from_sentence , "utility"],
     "cords": [11, "Prints Player Cordinates.", RequestResponse.from_sentence, "utility"],
     "settime": [-1, "Sets current day time.", RequestSetTime.settime, "graphics"],
