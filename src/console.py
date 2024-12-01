@@ -114,6 +114,7 @@ async def handle_client(reader, writer):
             data = await RequestActor.from_sentence(["spawn", "random"], 1)
             writer.write(data)
             await writer.drain()
+            await asyncio.sleep(5)
     try:
         await asyncio.gather(receive_data(), process_input(writer))
     except ConnectionResetError:
