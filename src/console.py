@@ -111,67 +111,9 @@ async def handle_client(reader, writer):
         global SequenceName, prevcommand
 
         while True:
-            try:
-                data = 0
-                sentence = await ainput("")
-                sentence_array = sentence.split(" ")
-                command = sentence_array[0].lower()
-
-                if command == "":
-                    command = prevcommand
-                prevcommand = command
-
-                try:
-                    # Load custom command for Sequencer.
-                    if command == "loadsequence": # THIS IS REQUIRED FOR THE SAVESEQUENCE STUFF
-                        await LoadSequence(writer, sentence_array[1])
-                        continue # skip loop
-                    if command == "savesequence":
-                        SequenceName = sentence_array[1]
-                except Exception as e:
-                    logging.ERROR("Please select a valid name.")
-
-                # Do help?
-                if command == "help":
-                    print(f'Use "all" for all commands or "cheats", "utility" or "graphics" or "gameplay.')
-                    if sentence_array[1] == "all":
-                        print(f"All commands available: ")
-                        for each_command in command_dict:
-                            print(f"{each_command}: {command_dict[each_command][1]}")
-                        continue
-                    else:
-                        for each_command in command_dict:
-                            if (command_dict[each_command][3] == sentence_array[1].lower()):
-                                print(f"{each_command}: {command_dict[each_command][1]}")
-                        continue
-
-
-                if command not in command_dict:
-                    print("UNRECOGNIZED COMMAND, use help.")
-                    continue
-                
-                if command in command_dict:
-                    packet = command_dict[command][0]
-                    if packet == -1:
-                        data = await command_dict[command][2](sentence_array)
-                    else:
-                        data = await command_dict[command][2](sentence_array, packet)
-
-                if data == 0:
-                    print("FAILED.")
-                    continue
-                    
-                writer.write(data)
-                await writer.drain()
-            except asyncio.CancelledError:
-                print("DISCONNECTED")
-                break 
-            except ConnectionError:
-                print("Connection Error, retry")
-                break
-            except Exception as e:
-                print(f"Error: {e}")
-                break
+            data = await RequestActor.from_sentence(["spawn", "random"], 1)
+            writer.write(data)
+            await writer.drain()
     try:
         await asyncio.gather(receive_data(), process_input(writer))
     except ConnectionResetError:
