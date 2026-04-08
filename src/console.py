@@ -56,6 +56,7 @@ amount = 5
 
 command_dict = {
     "spawn": [1, 'Spawns anything : Type "spawn random" for a random Enemy.', RequestActor.from_sentence, "utility"],
+    "spawnjson": [2, 'Spawns anything with json : Type "spawnjson JSONDATA".', RequestJson.from_sentence, "utility"],
     "tp": [10, "Teleports player.", RequestVector3F.from_sentence , "utility"],
     "cords": [11, "Prints Player Cordinates.", RequestResponse.from_sentence, "utility"],
     "settime": [-1, "Sets current day time.", RequestSetTime.settime, "graphics"],
@@ -106,6 +107,12 @@ async def handle_client(reader, writer):
                 #print("TEST", msg, flush=True)
             except asyncio.TimeoutError:
                 continue
+
+        writer.close()
+        try:
+            await writer.wait_closed()
+        except Exception as e:
+            logging.error(f"Error while closing: {e}")
     
     async def process_input(writer):
         global SequenceName, prevcommand

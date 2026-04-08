@@ -5,3 +5,4 @@ from .request_vector import *
 from .request_int import *
 from .request_bool import *
 from .request_spawn import *
+from .request_json import *
