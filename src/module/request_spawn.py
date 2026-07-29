@@ -171,16 +171,30 @@ class RequestActor:
 
     async def to_bytes(self):
         return struct.pack('<I', self.packet) + struct.pack('<I', self.amount) + struct.pack(f'!{len(self.actor)}s', self.actor.encode()) + struct.pack('<I', 0)
-
+    
     @classmethod
     async def from_sentence(cls, sentence_array, packet):
+        if len(sentence_array) < 2:
+            raise ValueError("Usage: spawn [amount] <actor>")
 
-        if sentence_array[1] == "random" or sentence_array[1] == "r":
-            instance = cls(packet=packet, amount=1, actor=random.choice(ActorList))
-            return await instance.to_bytes()
-        elif len(sentence_array) < 2:
-            instance = cls(packet=packet, amount=1, actor=sentence_array[1])
-            return await instance.to_bytes()
+        if sentence_array[1].lower() in ("random", "r"):
+            amount = 1
+            actor = random.choice(ActorList)
+
+        elif len(sentence_array) == 2:
+            amount = 1
+            actor = sentence_array[1]
+
         else:
-            instance = cls(packet=packet, amount=int(sentence_array[1]), actor=sentence_array[2])
-            return await instance.to_bytes()
+            try:
+                amount = int(sentence_array[1])
+            except ValueError:
+                raise ValueError("Amount must be a number")
+
+            if amount <= 0:
+                raise ValueError("Amount must be greater than zero")
+
+            actor = sentence_array[2]
+
+        instance = cls(packet=packet, amount=amount, actor=actor)
+        return await instance.to_bytes()

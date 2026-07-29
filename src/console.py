@@ -4,6 +4,7 @@ import struct
 import logging
 import configparser
 from keyframes import *
+import traceback
 from aioconsole import ainput
 from module.master_modules import * 
 
@@ -55,7 +56,7 @@ amount = 5
 ## ~~~~~~~~~~~~~~~~~~~~
 
 command_dict = {
-    "spawn": [1, 'Spawns anything : Type "spawn random" for a random Enemy.', RequestActor.from_sentence, "utility"],
+    "spawn": [1, 'Spawns anything : Type "spawn random" for a random Enemy. To spawn multiple actors do : "spawn 10 actor_here"', RequestActor.from_sentence, "utility"],
     "spawnjson": [2, 'Spawns anything with json : Type "spawnjson JSONDATA".', RequestJson.from_sentence, "utility"],
     "tp": [10, "Teleports player.", RequestVector3F.from_sentence , "utility"],
     "cords": [11, "Prints Player Cordinates.", RequestResponse.from_sentence, "utility"],
@@ -89,7 +90,7 @@ clients = []
 
 # just server logic pps.
 async def handle_client(reader, writer):
-
+    print(f"Client connected: {writer.get_extra_info('peername')}")
     # this is where we check if we receive a keyframe.
     async def receive_data():
         global SequenceName
@@ -140,17 +141,20 @@ async def handle_client(reader, writer):
 
                 # Do help?
                 if command == "help":
-                    print(f'Use "all" for all commands or "cheats", "utility" or "graphics" or "gameplay.')
-                    if sentence_array[1] == "all":
-                        print(f"All commands available: ")
+                    print('Use "all" for all commands or "cheats", "utility", "graphics", or "gameplay".')
+
+                    if len(sentence_array) < 2:
+                        continue
+
+                    if sentence_array[1].lower() == "all":
+                        print("All commands available:")
                         for each_command in command_dict:
                             print(f"{each_command}: {command_dict[each_command][1]}")
-                        continue
                     else:
                         for each_command in command_dict:
-                            if (command_dict[each_command][3] == sentence_array[1].lower()):
+                            if command_dict[each_command][3] == sentence_array[1].lower():
                                 print(f"{each_command}: {command_dict[each_command][1]}")
-                        continue
+                    continue
 
 
                 if command not in command_dict:
@@ -176,8 +180,8 @@ async def handle_client(reader, writer):
             except ConnectionError:
                 print("Connection Error, retry")
                 break
-            except Exception as e:
-                print(f"Error: {e}")
+            except Exception:
+                traceback.print_exc()
                 break
     try:
         await asyncio.gather(receive_data(), process_input(writer))
